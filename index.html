@@ -296,6 +296,70 @@
       form.reset();
     });
   </script>
+<script>
+  const form = document.getElementById('comment-form');
+  const commentsList = document.getElementById('comments-list');
+
+  // Load comments from localStorage when the page loads
+  window.onload = function() {
+    loadComments();
+  };
+
+  // Function to load comments from localStorage
+  function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    commentsList.innerHTML = '';  // Clear the current list
+    comments.forEach(comment => {
+      displayComment(comment.name, comment.text);
+    });
+  }
+
+  // Function to display a comment
+  function displayComment(name, text) {
+    const commentElement = document.createElement('div');
+    commentElement.classList.add('comment');
+    commentElement.innerHTML = `
+      <div class="name">${name}</div>
+      <div class="text">${text}</div>
+      <button class="delete-btn">Delete</button>
+    `;
+    commentsList.appendChild(commentElement);
+
+    // Add event listener for the delete button
+    const deleteBtn = commentElement.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', function () {
+      deleteComment(name, text);
+    });
+  }
+
+  // Function to delete a comment
+  function deleteComment(name, text) {
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments = comments.filter(comment => !(comment.name === name && comment.text === text)); // Remove the comment
+    localStorage.setItem('comments', JSON.stringify(comments)); // Save updated comments
+
+    // Reload the comments to display the updated list
+    loadComments();
+  }
+
+  // Handle form submission
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
+
+    // Save the new comment to localStorage
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push({ name, text: comment }); // Add the new comment
+    localStorage.setItem('comments', JSON.stringify(comments)); // Save to localStorage
+
+    // Display the new comment
+    displayComment(name, comment);
+
+    // Clear the form inputs
+    form.reset();
+  });
+</script>
 
 </body>
 </html>
