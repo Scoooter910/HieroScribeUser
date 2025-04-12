@@ -1,12 +1,8 @@
 {
-  "username1": {
-    "name": "User One",
-    "bio": "This is the bio of User One.",
-    "music": "https://api.soundcloud.com/tracks/2077210432"
-  },
-  "username2": {
-    "name": "User Two",
-    "bio": "This is the bio of User Two.",
-    "music": "https://api.soundcloud.com/tracks/2077210433"
+  "scoooter": {
+    "name": "ScoooterDev",
+    "bio": "Developer, musician, and mysterious code wizard.",
+    "music": "https://api.soundcloud.com/tracks/2077210432",
+    "profilePic": "images/LinkedInPic.jpg"
   }
 }
