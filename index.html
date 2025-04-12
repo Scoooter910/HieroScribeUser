@@ -2,69 +2,133 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ScoooterDev's MySpace</title>
+  <title>HieroScribe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #f4f4f4;
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      color: #000;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to bottom, #1e1e1e, #2c2c2c);
+      color: #f4f4f4;
+      min-height: 100vh;
       padding: 20px;
     }
 
     .container {
-      width: 800px;
+      max-width: 900px;
       margin: 0 auto;
-      background-color: white;
-      padding: 20px;
-      border: 3px dashed #333;
+      background-color: #111;
+      border: 2px solid #444;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(255, 211, 105, 0.1);
     }
 
-    .profile-pic {
-      float: left;
-      margin-right: 20px;
-      border: 4px solid #000;
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-family: 'Julius Sans One', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      color: #ffd369;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-top: 0.5rem;
     }
 
     .bio {
-      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      margin-top: 20px;
     }
 
-    h1 {
-      color: #ff00ff;
-      text-shadow: 1px 1px 0 #000;
+    .profile-pic {
+      border: 4px solid #ffd369;
+      margin-right: 20px;
+      width: 200px;
+      height: auto;
     }
 
-    .footer {
-      margin-top: 50px;
-      font-size: 12px;
+    .bio-text {
+      flex: 1;
+    }
+
+    .bio-text h2 {
+      font-size: 1.8rem;
+      color: #ffd369;
+      margin-bottom: 10px;
+    }
+
+    .bio-text p {
+      font-size: 1rem;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    .music {
+      margin-top: 40px;
+    }
+
+    .music h3 {
+      font-size: 1.5rem;
+      color: #ffd369;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
       color: #666;
+      border-top: 1px solid #333;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <h1>Welcome to My MySpace Page!</h1>
+    <header>
+      <h1>HieroScribe</h1>
+      <p>Write Your Legacy. Share Your World.</p>
+    </header>
+
     <div class="bio">
-      <img src="LinkedInPic.jpg" alt="My Profile Pic" class="profile-pic" width="200">
-      <p>Hey, I'm ScoooterDev 👋</p>
-      <p>This is my retro MySpace-style page, powered by GitHub Pages and good vibes.</p>
-      <p>Developer. Music lover. Internet nostalgia curator.</p>
+      <img src="LinkedInPic.jpg" alt="My Profile Picture" class="profile-pic">
+      <div class="bio-text">
+        <h2>Hey, I’m ScoooterDev 👋</h2>
+        <p>Welcome to HieroScribe — my corner of the web where code meets creativity. I’m a developer, dreamer, and digital explorer.</p>
+        <p>This page is just the beginning of a larger vision: blending retro internet charm with modern vibes. Stick around!</p>
+      </div>
     </div>
 
-    <h2>🎧 Now Playing</h2>
-    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-    </iframe>
-    <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
-      <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
-      <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
+    <div class="music">
+      <h3>🎧 Now Playing</h3>
+      <!-- SoundCloud Embed -->
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+      </iframe>
+      <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+        <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
+        <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
+      </div>
     </div>
 
-    <div class="footer">
-      <p>Built with 🎶 + 🖤 by ScoooterDev | 2025</p>
-    </div>
+    <footer>
+      &copy; 2025 HieroScribe · ScoooterDev · Built with soul and style
+    </footer>
   </div>
+
 </body>
-</html>
 </html>
