@@ -230,88 +230,87 @@
     </footer>
   </div>
 
-  <!-- JavaScript for handling comments -->
-  <script>
-    const form = document.getElementById('comment-form');
-    const commentsList = document.getElementById('comments-list');
+<script>
+  const form = document.getElementById('comment-form');
+  const commentsList = document.getElementById('comments-list');
 
-    // Load comments from the backend when the page loads
-    window.onload = function() {
-      loadComments();
-    };
+  // Load comments from the backend when the page loads
+  window.onload = function() {
+    loadComments();
+  };
 
-    // Function to load comments from the backend
-    function loadComments() {
-      fetch('http://localhost:3000/comments')  // Backend API URL
-        .then(response => response.json())
-        .then(comments => {
-          commentsList.innerHTML = '';  // Clear current list
-          comments.forEach(comment => {
-            displayComment(comment.name, comment.text);
-          });
-        })
-        .catch(err => console.error('Error fetching comments:', err));
-    }
-
-    // Function to display a comment
-    function displayComment(name, text) {
-      const commentElement = document.createElement('div');
-      commentElement.classList.add('comment');
-      commentElement.innerHTML = `
-        <div class="name">${name}</div>
-        <div class="text">${text}</div>
-        <button class="delete-btn">Delete</button>
-      `;
-      commentsList.appendChild(commentElement);
-
-      // Add event listener for the delete button
-      const deleteBtn = commentElement.querySelector('.delete-btn');
-      deleteBtn.addEventListener('click', function () {
-        deleteComment(name, text);
-      });
-    }
-
-    // Function to delete a comment
-    function deleteComment(name, text) {
-      fetch('http://localhost:3000/comments', {  // Backend API URL
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, text }),
+  // Function to load comments from the backend
+  function loadComments() {
+    fetch('https://hieroscribe-backend-a46705d2b99d.herokuapp.com/comments')  // Updated Backend URL
+      .then(response => response.json())
+      .then(comments => {
+        commentsList.innerHTML = '';  // Clear current list
+        comments.forEach(comment => {
+          displayComment(comment.name, comment.text);
+        });
       })
-        .then(response => response.json())
-        .then(() => {
-          loadComments();  // Reload comments after deletion
-        })
-        .catch(err => console.error('Error deleting comment:', err));
-    }
+      .catch(err => console.error('Error fetching comments:', err));
+  }
 
-    // Handle form submission to post a new comment
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const comment = document.getElementById('comment').value;
+  // Function to display a comment
+  function displayComment(name, text) {
+    const commentElement = document.createElement('div');
+    commentElement.classList.add('comment');
+    commentElement.innerHTML = `
+      <div class="name">${name}</div>
+      <div class="text">${text}</div>
+      <button class="delete-btn">Delete</button>
+    `;
+    commentsList.appendChild(commentElement);
 
-      // Send a POST request to add the new comment
-      fetch('http://localhost:3000/comments', {  // Backend API URL
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, text: comment }),
-      })
-        .then(response => response.json())
-        .then(newComment => {
-          // Display the new comment on the page
-          displayComment(newComment.name, newComment.text);
-
-          // Clear the form
-          form.reset();
-        })
-        .catch(err => console.error('Error posting comment:', err));
+    // Add event listener for the delete button
+    const deleteBtn = commentElement.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', function () {
+      deleteComment(name, text);
     });
-  </script>
+  }
+
+  // Function to delete a comment
+  function deleteComment(name, text) {
+    fetch('https://hieroscribe-backend-a46705d2b99d.herokuapp.com/comments', {  // Updated Backend URL
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, text }),
+    })
+      .then(response => response.json())
+      .then(() => {
+        loadComments();  // Reload comments after deletion
+      })
+      .catch(err => console.error('Error deleting comment:', err));
+  }
+
+  // Handle form submission to post a new comment
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
+
+    // Send a POST request to add the new comment
+    fetch('https://hieroscribe-backend-a46705d2b99d.herokuapp.com/comments', {  // Updated Backend URL
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, text: comment }),
+    })
+      .then(response => response.json())
+      .then(newComment => {
+        // Display the new comment on the page
+        displayComment(newComment.name, newComment.text);
+
+        // Clear the form
+        form.reset();
+      })
+      .catch(err => console.error('Error posting comment:', err));
+  });
+</script>
 
 </body>
 </html>
