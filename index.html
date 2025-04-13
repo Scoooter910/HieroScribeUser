@@ -196,16 +196,40 @@
       </div>
     </div>
 
+    <!-- Music Section with Toggleable Players -->
     <div class="music">
-  <h3>🎧 Now Playing</h3>
-  <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1271186485&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-  </iframe>
-  <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
-    <a href="https://soundcloud.com/kdlangofficial" title="k.d. lang" target="_blank" style="color: #cccccc; text-decoration: none;">k.d. lang</a> · 
-    <a href="https://soundcloud.com/kdlangofficial/constant-craving-live-1" title="Constant Craving (live)" target="_blank" style="color: #cccccc; text-decoration: none;">Constant Craving (live)</a>
-  </div>
-</div>
+      <h3>🎧 Now Playing</h3>
+
+      <!-- Mystic Elegy Song -->
+      <div id="mystic-elegy-player">
+        <h4>Mystic Elegy</h4>
+        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+        </iframe>
+        <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+          <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
+          <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
+        </div>
+      </div>
+
+      <!-- k.d. lang - Constant Craving Song -->
+      <div id="constant-craving-player" style="display: none;">
+        <h4>Constant Craving (live) by k.d. lang</h4>
+        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1271186485&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+        </iframe>
+        <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+          <a href="https://soundcloud.com/kdlangofficial" title="k.d. lang" target="_blank" style="color: #cccccc; text-decoration: none;">k.d. lang</a> · 
+          <a href="https://soundcloud.com/kdlangofficial/constant-craving-live-1" title="Constant Craving (live)" target="_blank" style="color: #cccccc; text-decoration: none;">Constant Craving (live)</a>
+        </div>
+      </div>
+
+      <!-- Buttons to switch between songs -->
+      <div id="song-selection">
+        <button onclick="changeSong('mystic-elegy')">Play Mystic Elegy</button>
+        <button onclick="changeSong('constant-craving')">Play Constant Craving</button>
+      </div>
+    </div>
 
     <div class="comments">
       <h3>📝 Leave a Comment</h3>
@@ -279,7 +303,7 @@
       body: JSON.stringify({ name, text })
     })
       .then(res => res.json())
-      .then(() => {
+      .then(data => {
         loadComments();
       })
       .catch(err => {
@@ -287,29 +311,43 @@
       });
   }
 
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const comment = document.getElementById('comment').value.trim();
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-    if (name && comment) {
-      fetch(`${API_BASE}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, text: comment })
+    const name = document.getElementById('name').value;
+    const commentText = document.getElementById('comment').value;
+
+    const commentData = { name, text: commentText };
+
+    fetch(`${API_BASE}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(commentData)
+    })
+      .then(res => res.json())
+      .then(() => {
+        loadComments();
+        form.reset();
       })
-        .then(res => res.json())
-        .then(data => {
-          displayComment(data.name, data.text);
-          form.reset();
-        })
-        .catch(err => {
-          console.error('Failed to post comment:', err);
-        });
-    }
+      .catch(err => {
+        console.error('Failed to post comment:', err);
+      });
   });
+
+  function changeSong(song) {
+    const mysticElegyPlayer = document.getElementById('mystic-elegy-player');
+    const constantCravingPlayer = document.getElementById('constant-craving-player');
+    
+    if (song === 'mystic-elegy') {
+      mysticElegyPlayer.style.display = 'block';
+      constantCravingPlayer.style.display = 'none';
+    } else if (song === 'constant-craving') {
+      mysticElegyPlayer.style.display = 'none';
+      constantCravingPlayer.style.display = 'block';
+    }
+  }
 </script>
 
 </body>
