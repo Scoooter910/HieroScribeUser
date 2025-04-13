@@ -1,125 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>HieroScribe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans&display=swap" rel="stylesheet">
-  
-  <!-- Link to external CSS file -->
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-  <div class="container">
-    <header>
-      <h1>HieroScribe</h1>
-      <p>Write Your Legacy. Share Your World.</p>
-    </header>
-
-    <div class="bio">
-      <img src="LinkedInPic.jpg" alt="My Profile Picture" class="profile-pic">
-      <div class="bio-text">
-        <h2>Hey, I’m ScoooterDev 👋</h2>
-        <p>Welcome to HieroScribe — my corner of the web where code meets creativity. I’m a developer, dreamer, and digital explorer.</p>
-        <p>This page is just the beginning of a larger vision: blending retro internet charm with modern vibes. Stick around!</p>
-      </div>
-    </div>
-
-    <div class="music">
-      <h3>🎧 Now Playing</h3>
-      <!-- SoundCloud Embed (Smaller Size) -->
-      <iframe width="300" height="50" scrolling="no" frameborder="no" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-      </iframe>
-      <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
-        <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
-        <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
-      </div>
-    </div>
-
-    <!-- Comments Section -->
-    <div class="comments">
-      <h3>📝 Leave a Comment</h3>
-      <form id="comment-form">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="comment">Your Comment:</label>
-        <textarea id="comment" name="comment" rows="4" required></textarea>
-
-        <button type="submit">Post Comment</button>
-      </form>
-
-      <div id="comments-list">
-        <h4>Comments</h4>
-      </div>
-    </div>
-
-    <footer>
-      &copy; 2025 HieroScribe · ScoooterDev · Built with soul and style
-    </footer>
-  </div>
-
-<!-- JavaScript for handling comments -->
-<script>
-  const form = document.getElementById('comment-form');
-  const commentsList = document.getElementById('comments-list');
-
-  // Load comments from the backend when the page loads
-  window.onload = function() {
-    loadComments();
-  };
-
-  // Function to load comments from the backend
-  function loadComments() {
-    fetch('https://your-heroku-app.herokuapp.com/comments')  // Update with your Heroku backend URL
-      .then(response => response.json())
-      .then(comments => {
-        commentsList.innerHTML = '';  // Clear current list
-        comments.forEach(comment => {
-          displayComment(comment.name, comment.text);
-        });
-      })
-      .catch(err => console.error('Error fetching comments:', err));
-  }
-
-  // Function to display a comment
-  function displayComment(name, text) {
-    const commentElement = document.createElement('div');
-    commentElement.classList.add('comment');
-    commentElement.innerHTML = `
-      <div class="name">${name}</div>
-      <div class="text">${text}</div>
-    `;
-    commentsList.appendChild(commentElement);
-  }
-
-  // Handle form submission
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const comment = document.getElementById('comment').value;
-
-    // Post the new comment to the backend
-    fetch('https://your-heroku-app.herokuapp.com/comments', {  // Update with your Heroku backend URL
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, text: comment })
-    })
-      .then(response => response.json())
-      .then(newComment => {
-        // Display the new comment on the page
-        displayComment(newComment.name, newComment.text);
-
-        // Clear the form
-        form.reset();
-      })
-      .catch(err => console.error('Error posting comment:', err));
-  });
-</script>
-
-</body>
-</html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <title>HieroScribe</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans&display=swap" rel="stylesheet">
+   <style>
+     * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+     }
+ 
+     body {
+       font-family: 'Open Sans', sans-serif;
+       background: linear-gradient(to bottom, #1e1e1e, #2c2c2c);
+       color: #f4f4f4;
+       min-height: 100vh;
+       padding: 20px;
+     }
+ 
+     .container {
+       max-width: 900px;
+       margin: 0 auto;
+       background-color: #111;
+       border: 2px solid #444;
+       padding: 30px;
+       box-shadow: 0 0 20px rgba(255, 211, 105, 0.1);
+     }
+ 
+     header {
+       text-align: center;
+       margin-bottom: 30px;
+     }
+ 
+     header h1 {
+       font-family: 'Julius Sans One', sans-serif;
+       font-size: 3rem;
+       letter-spacing: 2px;
+       color: #ffd369;
+     }
+ 
+     header p {
+       font-size: 1.2rem;
+       color: #ccc;
+       margin-top: 0.5rem;
+     }
+ 
+     .bio {
+       display: flex;
+       align-items: flex-start;
+       margin-top: 20px;
+     }
+ 
+     .profile-pic {
+       border: 4px solid #ffd369;
+       margin-right: 20px;
+       width: 200px;
+       height: auto;
+     }
+ 
+     .bio-text {
+       flex: 1;
+     }
+ 
+     .bio-text h2 {
+       font-size: 1.8rem;
+       color: #ffd369;
+       margin-bottom: 10px;
+     }
+ 
+     .bio-text p {
+       font-size: 1rem;
+       color: #e0e0e0;
+       line-height: 1.6;
+     }
+ 
+     .music {
+       margin-top: 40px;
+     }
+ 
+     .music h3 {
+       font-size: 1.5rem;
+       color: #ffd369;
+       margin-bottom: 10px;
+     }
+ 
+     .comments {
+       margin-top: 40px;
+       color: #e0e0e0;
+     }
+ 
+     .comments h3 {
+       font-size: 1.5rem;
+       color: #ffd369;
+     }
+ 
+     .comments form {
+       display: flex;
+       flex-direction: column;
+       margin-bottom: 20px;
+     }
+ 
+     .comments form label {
+       font-size: 1rem;
+       color: #ffd369;
+       margin-top: 10px;
+     }
+ 
+     .comments form input, .comments form textarea {
+       padding: 10px;
+       font-size: 1rem;
+       border: 1px solid #444;
+       background-color: #222;
+       color: #fff;
+       margin-top: 5px;
+     }
+ 
+     .comments form button {
+       padding: 10px;
+       background-color: #ffd369;
+       border: none;
+       color: #111;
+       cursor: pointer;
+       font-size: 1rem;
+       margin-top: 10px;
+     }
+ 
+     .comments form button:hover {
+       background-color: #ffaa33;
+     }
+ 
+     #comments-list {
+       margin-top: 20px;
+     }
+ 
+     .comment {
+       margin-bottom: 20px;
+       padding: 10px;
+       background-color: #333;
+       border: 1px solid #444;
+       position: relative;
+     }
+ 
+     .comment .name {
+       font-weight: bold;
+       color: #ffd369;
+     }
+ 
+     .comment .text {
+       color: #ccc;
+       margin-top: 5px;
+     }
+ 
+     .comment .delete-btn {
+       position: absolute;
+       top: 10px;
+       right: 10px;
+       background-color: #ff5555;
+       color: white;
+       border: none;
+       padding: 5px;
+       cursor: pointer;
+     }
+ 
+     .comment .delete-btn:hover {
+       background-color: #ff3333;
+     }
+ 
+     footer {
+       text-align: center;
+       padding: 20px;
+       margin-top: 40px;
+       color: #666;
+       border-top: 1px solid #333;
+       font-size: 0.9rem;
+     }
+ 
+   </style>
+ </head>
+ <body>
+ 
+   <div class="container">
+     <header>
+       <h1>HieroScribe</h1>
+       <p>Write Your Legacy. Share Your World.</p>
+     </header>
+ 
+     <div class="bio">
+       <img src="LinkedInPic.jpg" alt="My Profile Picture" class="profile-pic">
+       <div class="bio-text">
+         <h2>Hey, I’m ScoooterDev 👋</h2>
+         <p>Welcome to HieroScribe — my corner of the web where code meets creativity. I’m a developer, dreamer, and digital explorer.</p>
+         <p>This page is just the beginning of a larger vision: blending retro internet charm with modern vibes. Stick around!</p>
+       </div>
+     </div>
+ 
+     <div class="music">
+       <h3>🎧 Now Playing</h3>
+       <!-- SoundCloud Embed (Smaller Size) -->
+       <iframe width="300" height="50" scrolling="no" frameborder="no" allow="autoplay"
+         src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+       </iframe>
+       <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+         <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
+         <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
+       </div>
+     </div>
+ 
+     <!-- Comments Section -->
+     <div class="comments">
+       <h3>📝 Leave a Comment</h3>
+       <form id="comment-form">
+         <label for="name">Your Name:</label>
+         <input type="text" id="name" name="name" required>
+ 
+         <label for="comment">Your Comment:</label>
+         <textarea id="comment" name="comment" rows="4" required></textarea>
+ 
+         <button type="submit">Post Comment</button>
+       </form>
+ 
+       <div id="comments-list">
+         <h4>Comments</h4>
+       </div>
+     </div>
+ 
+     <footer>
+       &copy; 2025 HieroScribe · ScoooterDev · Built with soul and style
+     </footer>
+   </div>
+ 
+   <!-- JavaScript for handling comments -->
+   <script>
+     const form = document.getElementById('comment-form');
+     const commentsList = document.getElementById('comments-list');
+ 
+     // Load comments from localStorage when the page loads
+     window.onload = function() {
+       loadComments();
+     };
+ 
+     // Function to load comments from localStorage
+     function loadComments() {
+       const comments = JSON.parse(localStorage.getItem('comments')) || [];
+       commentsList.innerHTML = '';  // Clear the current list
+       comments.forEach(comment => {
+         displayComment(comment.name, comment.text);
+       });
+     }
+ 
+     // Function to display a comment
+     function displayComment(name, text) {
+       const commentElement = document.createElement('div');
+       commentElement.classList.add('comment');
+       commentElement.innerHTML = `
+         <div class="name">${name}</div>
+         <div class="text">${text}</div>
+         <button class="delete-btn">Delete</button>
+       `;
+       commentsList.appendChild(commentElement);
+ 
+       // Add event listener for the delete button
+       const deleteBtn = commentElement.querySelector('.delete-btn');
+       deleteBtn.addEventListener('click', function () {
+         deleteComment(name, text);
+       });
+     }
+ 
+     // Function to delete a comment
+     function deleteComment(name, text) {
+       let comments = JSON.parse(localStorage.getItem('comments')) || [];
+       comments = comments.filter(comment => !(comment.name === name && comment.text === text));
+       localStorage.setItem('comments', JSON.stringify(comments));
+ 
+       // Reload the comments
+       loadComments();
+     }
+ 
+     // Handle form submission
+     form.addEventListener('submit', function (event) {
+       event.preventDefault();
+       const name = document.getElementById('name').value;
+       const comment = document.getElementById('comment').value;
+ 
+       // Save the new comment to localStorage
+       const comments = JSON.parse(localStorage.getItem('comments')) || [];
+       comments.push({ name, text: comment });
+       localStorage.setItem('comments', JSON.stringify(comments));
+ 
+       // Display the new comment
+       displayComment(name, comment);
+ 
+       // Clear the form
+       form.reset();
+     });
+   </script>
+ <!-- JavaScript for handling comments -->
+ <script>
+   const form = document.getElementById('comment-form');
+   const commentsList = document.getElementById('comments-list');
+ @@ -335,10 +271,10 @@
+   // Function to delete a comment
+   function deleteComment(name, text) {
+     let comments = JSON.parse(localStorage.getItem('comments')) || [];
+     comments = comments.filter(comment => !(comment.name === name && comment.text === text)); // Remove the comment
+     localStorage.setItem('comments', JSON.stringify(comments)); // Save updated comments
+     comments = comments.filter(comment => !(comment.name === name && comment.text === text));
+     localStorage.setItem('comments', JSON.stringify(comments));
+ 
+     // Reload the comments to display the updated list
+     // Reload the comments
+     loadComments();
+   }
+ 
+ @@ -350,16 +286,16 @@
+ 
+     // Save the new comment to localStorage
+     const comments = JSON.parse(localStorage.getItem('comments')) || [];
+     comments.push({ name, text: comment }); // Add the new comment
+     localStorage.setItem('comments', JSON.stringify(comments)); // Save to localStorage
+     comments.push({ name, text: comment });
+     localStorage.setItem('comments', JSON.stringify(comments));
+ 
+     // Display the new comment
+     displayComment(name, comment);
+ 
+     // Clear the form inputs
+     // Clear the form
+     form.reset();
+   });
+ </script>
+ 
+ </body>
+ </html>
