@@ -82,20 +82,19 @@ header p {
 }
 
 .music h3 {
-  font-size: 4vw;  /* Adjust font size */
+  font-size: 4vw;
   color: #ffd369;
   margin-bottom: 2vw;
 }
 
-/* Adjust the iframe to be responsive */
 .music iframe {
-  width: 80%;  /* Adjust width to 80% of the container */
-  height: 50vw;  /* Set height to 50% of the viewport width */
-  max-width: 600px;  /* Set max width to ensure it doesn't get too large */
-  margin: 0 auto;  /* Center the player */
+  width: 80%;
+  height: 50vw;
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
 }
 
-/* Music Text */
 .music .music-text {
   font-size: 2vw;
   color: #cccccc;
