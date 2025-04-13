@@ -5,179 +5,8 @@
   <title>HieroScribe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(to bottom, #1e1e1e, #2c2c2c);
-      color: #f4f4f4;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background-color: #111;
-      border: 2px solid #444;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(255, 211, 105, 0.1);
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    header h1 {
-      font-family: 'Julius Sans One', sans-serif;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      color: #ffd369;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-      margin-top: 0.5rem;
-    }
-
-    .bio {
-      display: flex;
-      align-items: flex-start;
-      margin-top: 20px;
-    }
-
-    .profile-pic {
-      border: 4px solid #ffd369;
-      margin-right: 20px;
-      width: 200px;
-      height: auto;
-    }
-
-    .bio-text {
-      flex: 1;
-    }
-
-    .bio-text h2 {
-      font-size: 1.8rem;
-      color: #ffd369;
-      margin-bottom: 10px;
-    }
-
-    .bio-text p {
-      font-size: 1rem;
-      color: #e0e0e0;
-      line-height: 1.6;
-    }
-
-    .music {
-      margin-top: 40px;
-    }
-
-    .music h3 {
-      font-size: 1.5rem;
-      color: #ffd369;
-      margin-bottom: 10px;
-    }
-
-    .comments {
-      margin-top: 40px;
-      color: #e0e0e0;
-    }
-
-    .comments h3 {
-      font-size: 1.5rem;
-      color: #ffd369;
-    }
-
-    .comments form {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-    }
-
-    .comments form label {
-      font-size: 1rem;
-      color: #ffd369;
-      margin-top: 10px;
-    }
-
-    .comments form input,
-    .comments form textarea {
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #444;
-      background-color: #222;
-      color: #fff;
-      margin-top: 5px;
-    }
-
-    .comments form button {
-      padding: 10px;
-      background-color: #ffd369;
-      border: none;
-      color: #111;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 10px;
-    }
-
-    .comments form button:hover {
-      background-color: #ffaa33;
-    }
-
-    #comments-list {
-      margin-top: 20px;
-    }
-
-    .comment {
-      margin-bottom: 20px;
-      padding: 10px;
-      background-color: #333;
-      border: 1px solid #444;
-      position: relative;
-    }
-
-    .comment .name {
-      font-weight: bold;
-      color: #ffd369;
-    }
-
-    .comment .text {
-      color: #ccc;
-      margin-top: 5px;
-    }
-
-    .comment .delete-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #ff5555;
-      color: white;
-      border: none;
-      padding: 5px;
-      cursor: pointer;
-    }
-
-    .comment .delete-btn:hover {
-      background-color: #ff3333;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      color: #666;
-      border-top: 1px solid #333;
-      font-size: 0.9rem;
-    }
-  </style>
+  <!-- Link to External CSS File -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -196,38 +25,14 @@
       </div>
     </div>
 
-    <!-- Music Section with Toggleable Players -->
     <div class="music">
       <h3>🎧 Now Playing</h3>
-
-      <!-- Mystic Elegy Song -->
-      <div id="mystic-elegy-player">
-        <h4>Mystic Elegy</h4>
-        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-        </iframe>
-        <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
-          <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
-          <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
-        </div>
-      </div>
-
-      <!-- k.d. lang - Constant Craving Song -->
-      <div id="constant-craving-player" style="display: none;">
-        <h4>Constant Craving (live) by k.d. lang</h4>
-        <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1271186485&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-        </iframe>
-        <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
-          <a href="https://soundcloud.com/kdlangofficial" title="k.d. lang" target="_blank" style="color: #cccccc; text-decoration: none;">k.d. lang</a> · 
-          <a href="https://soundcloud.com/kdlangofficial/constant-craving-live-1" title="Constant Craving (live)" target="_blank" style="color: #cccccc; text-decoration: none;">Constant Craving (live)</a>
-        </div>
-      </div>
-
-      <!-- Buttons to switch between songs -->
-      <div id="song-selection">
-        <button onclick="changeSong('mystic-elegy')">Play Mystic Elegy</button>
-        <button onclick="changeSong('constant-craving')">Play Constant Craving</button>
+      <iframe width="300" height="50" scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+      </iframe>
+      <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
+        <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
+        <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
       </div>
     </div>
 
@@ -282,49 +87,21 @@
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
     commentElement.innerHTML = `
-      <div class="name">${name}</div>
-      <div class="text">${text}</div>
-      <button class="delete-btn">Delete</button>
+      <span class="name">${name}</span>
+      <p class="text">${text}</p>
     `;
     commentsList.appendChild(commentElement);
-
-    const deleteBtn = commentElement.querySelector('.delete-btn');
-    deleteBtn.addEventListener('click', function () {
-      deleteComment(name, text);
-    });
   }
 
-  function deleteComment(name, text) {
-    fetch(`${API_BASE}/comments`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name, text })
-    })
-      .then(res => res.json())
-      .then(data => {
-        loadComments();
-      })
-      .catch(err => {
-        console.error('Failed to delete comment:', err);
-      });
-  }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const commentText = document.getElementById('comment').value;
-
-    const commentData = { name, text: commentText };
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const name = form.name.value;
+    const comment = form.comment.value;
 
     fetch(`${API_BASE}/comments`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(commentData)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, text: comment }),
     })
       .then(res => res.json())
       .then(() => {
@@ -335,19 +112,6 @@
         console.error('Failed to post comment:', err);
       });
   });
-
-  function changeSong(song) {
-    const mysticElegyPlayer = document.getElementById('mystic-elegy-player');
-    const constantCravingPlayer = document.getElementById('constant-craving-player');
-    
-    if (song === 'mystic-elegy') {
-      mysticElegyPlayer.style.display = 'block';
-      constantCravingPlayer.style.display = 'none';
-    } else if (song === 'constant-craving') {
-      mysticElegyPlayer.style.display = 'none';
-      constantCravingPlayer.style.display = 'block';
-    }
-  }
 </script>
 
 </body>
