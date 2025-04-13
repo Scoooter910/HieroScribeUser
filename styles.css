@@ -1,3 +1,4 @@
+/* Reset and global styles */
 * {
   margin: 0;
   padding: 0;
@@ -13,112 +14,120 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 auto;
   background-color: #111;
   border: 2px solid #444;
-  padding: 30px;
+  padding: 3vw;  /* Using viewport width for padding */
   box-shadow: 0 0 20px rgba(255, 211, 105, 0.1);
+  width: auto;
+  overflow: hidden;  /* Prevent overflow outside the container */
 }
 
+/* Flex layout */
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 3vw;
 }
 
 header h1 {
   font-family: 'Julius Sans One', sans-serif;
-  font-size: 3rem;
+  font-size: 5vw; /* Adjust based on viewport width */
   letter-spacing: 2px;
   color: #ffd369;
 }
 
 header p {
-  font-size: 1.2rem;
+  font-size: 2vw;
   color: #ccc;
   margin-top: 0.5rem;
 }
 
+/* Bio Section */
 .bio {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 3vw;
 }
 
 .profile-pic {
   border: 4px solid #ffd369;
-  margin-bottom: 20px;
-  width: 200px;
+  margin-bottom: 3vw;
+  width: 40vw;  /* Responsive width based on screen size */
   height: auto;
 }
 
 .bio-text {
   text-align: center;
+  word-wrap: break-word; /* Ensure long words break to the next line */
 }
 
 .bio-text h2 {
-  font-size: 1.8rem;
+  font-size: 4vw;
   color: #ffd369;
-  margin-bottom: 10px;
+  margin-bottom: 1.5vw;
 }
 
 .bio-text p {
-  font-size: 1rem;
+  font-size: 2.5vw;
   color: #e0e0e0;
   line-height: 1.6;
+  padding: 0 2vw;  /* Add padding to prevent text from touching the edges */
 }
 
+/* Music Player Section */
 .music {
-  margin-top: 40px;
+  margin-top: 4vw;
 }
 
 .music h3 {
-  font-size: 1.5rem;
+  font-size: 2.5vw;
   color: #ffd369;
-  margin-bottom: 10px;
+  margin-bottom: 2vw;
 }
 
+/* Comments Section */
 .comments {
-  margin-top: 40px;
+  margin-top: 4vw;
   color: #e0e0e0;
 }
 
 .comments h3 {
-  font-size: 1.5rem;
+  font-size: 2.5vw;
   color: #ffd369;
 }
 
 .comments form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 3vw;
 }
 
 .comments form label {
-  font-size: 1rem;
+  font-size: 2vw;
   color: #ffd369;
-  margin-top: 10px;
+  margin-top: 1.5vw;
 }
 
 .comments form input,
 .comments form textarea {
-  padding: 10px;
-  font-size: 1rem;
+  padding: 2vw;
+  font-size: 2vw;
   border: 1px solid #444;
   background-color: #222;
   color: #fff;
-  margin-top: 5px;
+  margin-top: 1vw;
 }
 
 .comments form button {
-  padding: 10px;
+  padding: 2vw;
   background-color: #ffd369;
   border: none;
   color: #111;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 10px;
+  font-size: 2vw;
+  margin-top: 1vw;
 }
 
 .comments form button:hover {
@@ -126,12 +135,12 @@ header p {
 }
 
 #comments-list {
-  margin-top: 20px;
+  margin-top: 3vw;
 }
 
 .comment {
-  margin-bottom: 20px;
-  padding: 10px;
+  margin-bottom: 3vw;
+  padding: 2vw;
   background-color: #333;
   border: 1px solid #444;
   position: relative;
@@ -144,17 +153,17 @@ header p {
 
 .comment .text {
   color: #ccc;
-  margin-top: 5px;
+  margin-top: 1vw;
 }
 
 .comment .delete-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 1vw;
+  right: 1vw;
   background-color: #ff5555;
   color: white;
   border: none;
-  padding: 5px;
+  padding: 1vw;
   cursor: pointer;
 }
 
@@ -164,105 +173,86 @@ header p {
 
 footer {
   text-align: center;
-  padding: 20px;
-  margin-top: 40px;
+  padding: 2vw;
+  margin-top: 4vw;
   color: #666;
   border-top: 1px solid #333;
-  font-size: 0.9rem;
+  font-size: 2vw;
 }
 
-/* Media Queries for Mobile Responsiveness */
+/* Media Queries for Mobile and Tablet Responsiveness */
 @media (max-width: 768px) {
+  .container {
+    padding: 5vw;
+  }
+
   header h1 {
-    font-size: 2rem;
-  }
-
-  header p {
-    font-size: 1rem;
-  }
-
-  .bio {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .bio-text h2 {
-    font-size: 1.5rem;
-  }
-
-  .bio-text p {
-    font-size: 0.9rem;
+    font-size: 6vw;
   }
 
   .profile-pic {
-    width: 150px;
+    width: 50vw;
   }
 
-  .music h3 {
-    font-size: 1.2rem;
+  .bio-text h2 {
+    font-size: 5vw;
   }
 
+  .bio-text p {
+    font-size: 3vw;
+    padding: 0 3vw;  /* Increase padding for mobile devices */
+  }
+
+  .music h3,
   .comments h3 {
-    font-size: 1.2rem;
+    font-size: 4vw;
   }
 
   .comments form input,
-  .comments form textarea {
-    font-size: 0.9rem;
-  }
-
+  .comments form textarea,
   .comments form button {
-    font-size: 0.9rem;
-  }
-
-  .comment .name {
-    font-size: 1rem;
-  }
-
-  .comment .text {
-    font-size: 0.9rem;
+    font-size: 3vw;
   }
 
   footer {
-    font-size: 0.8rem;
+    font-size: 3vw;
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 15px;
+    padding: 7vw;
   }
 
   header h1 {
-    font-size: 1.6rem;
+    font-size: 7vw;
+  }
+
+  .profile-pic {
+    width: 60vw;
   }
 
   .bio-text h2 {
-    font-size: 1.3rem;
+    font-size: 6vw;
   }
 
   .bio-text p {
-    font-size: 0.8rem;
+    font-size: 4vw;
+    padding: 0 4vw;  /* Increase padding for better readability */
   }
 
-  .music h3 {
-    font-size: 1rem;
-  }
-
+  .music h3,
   .comments h3 {
-    font-size: 1rem;
+    font-size: 5vw;
   }
 
   .comments form input,
-  .comments form textarea {
-    font-size: 0.8rem;
-  }
-
+  .comments form textarea,
   .comments form button {
-    font-size: 0.8rem;
+    font-size: 4vw;
   }
 
   footer {
-    font-size: 0.7rem;
+    font-size: 4vw;
   }
 }
