@@ -1,10 +1,11 @@
-/* Reset and global styles */
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body */
 body {
   font-family: 'Open Sans', sans-serif;
   background: linear-gradient(to bottom, #1e1e1e, #2c2c2c);
@@ -13,32 +14,31 @@ body {
   padding: 20px;
 }
 
+/* Container */
 .container {
-  max-width: 100%;
+  max-width: 900px;
   margin: 0 auto;
   background-color: #111;
   border: 2px solid #444;
-  padding: 3vw;  /* Using viewport width for padding */
+  padding: 30px;
   box-shadow: 0 0 20px rgba(255, 211, 105, 0.1);
-  width: auto;
-  overflow: hidden;  /* Prevent overflow outside the container */
 }
 
-/* Flex layout */
+/* Header */
 header {
   text-align: center;
-  margin-bottom: 3vw;
+  margin-bottom: 30px;
 }
 
 header h1 {
   font-family: 'Julius Sans One', sans-serif;
-  font-size: 5vw; /* Adjust based on viewport width */
+  font-size: 3rem;
   letter-spacing: 2px;
   color: #ffd369;
 }
 
 header p {
-  font-size: 2vw;
+  font-size: 1.2rem;
   color: #ccc;
   margin-top: 0.5rem;
 }
@@ -46,88 +46,113 @@ header p {
 /* Bio Section */
 .bio {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3vw;
+  align-items: flex-start;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .profile-pic {
   border: 4px solid #ffd369;
-  margin-bottom: 3vw;
-  width: 40vw;  /* Responsive width based on screen size */
+  margin-right: 20px;
+  width: 200px;
   height: auto;
+  margin-bottom: 20px;
 }
 
 .bio-text {
-  text-align: center;
-  word-wrap: break-word; /* Ensure long words break to the next line */
+  flex: 1;
 }
 
 .bio-text h2 {
-  font-size: 4vw;
+  font-size: 1.8rem;
   color: #ffd369;
-  margin-bottom: 1.5vw;
+  margin-bottom: 10px;
 }
 
 .bio-text p {
-  font-size: 2.5vw;
+  font-size: 1rem;
   color: #e0e0e0;
   line-height: 1.6;
-  padding: 0 2vw;  /* Add padding to prevent text from touching the edges */
 }
 
-/* Music Player Section */
+/* Music Section */
 .music {
   margin-top: 4vw;
+  text-align: center;
 }
 
 .music h3 {
-  font-size: 2.5vw;
+  font-size: 4vw;  /* Adjust font size */
   color: #ffd369;
   margin-bottom: 2vw;
 }
 
+/* Adjust the iframe to be responsive */
+.music iframe {
+  width: 80%;  /* Adjust width to 80% of the container */
+  height: 50vw;  /* Set height to 50% of the viewport width */
+  max-width: 600px;  /* Set max width to ensure it doesn't get too large */
+  margin: 0 auto;  /* Center the player */
+}
+
+/* Music Text */
+.music .music-text {
+  font-size: 2vw;
+  color: #cccccc;
+  margin-top: 1vw;
+}
+
+.music .music-text a {
+  color: #ffd369;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.music .music-text a:hover {
+  text-decoration: underline;
+}
+
 /* Comments Section */
 .comments {
-  margin-top: 4vw;
+  margin-top: 40px;
   color: #e0e0e0;
 }
 
 .comments h3 {
-  font-size: 2.5vw;
+  font-size: 1.5rem;
   color: #ffd369;
 }
 
 .comments form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 3vw;
+  margin-bottom: 20px;
 }
 
 .comments form label {
-  font-size: 2vw;
+  font-size: 1rem;
   color: #ffd369;
-  margin-top: 1.5vw;
+  margin-top: 10px;
 }
 
 .comments form input,
 .comments form textarea {
-  padding: 2vw;
-  font-size: 2vw;
+  padding: 10px;
+  font-size: 1rem;
   border: 1px solid #444;
   background-color: #222;
   color: #fff;
-  margin-top: 1vw;
+  margin-top: 5px;
 }
 
 .comments form button {
-  padding: 2vw;
+  padding: 10px;
   background-color: #ffd369;
   border: none;
   color: #111;
   cursor: pointer;
-  font-size: 2vw;
-  margin-top: 1vw;
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
 .comments form button:hover {
@@ -135,12 +160,12 @@ header p {
 }
 
 #comments-list {
-  margin-top: 3vw;
+  margin-top: 20px;
 }
 
 .comment {
-  margin-bottom: 3vw;
-  padding: 2vw;
+  margin-bottom: 20px;
+  padding: 10px;
   background-color: #333;
   border: 1px solid #444;
   position: relative;
@@ -153,17 +178,17 @@ header p {
 
 .comment .text {
   color: #ccc;
-  margin-top: 1vw;
+  margin-top: 5px;
 }
 
 .comment .delete-btn {
   position: absolute;
-  top: 1vw;
-  right: 1vw;
+  top: 10px;
+  right: 10px;
   background-color: #ff5555;
   color: white;
   border: none;
-  padding: 1vw;
+  padding: 5px;
   cursor: pointer;
 }
 
@@ -171,88 +196,89 @@ header p {
   background-color: #ff3333;
 }
 
+/* Footer */
 footer {
   text-align: center;
-  padding: 2vw;
-  margin-top: 4vw;
+  padding: 20px;
+  margin-top: 40px;
   color: #666;
   border-top: 1px solid #333;
-  font-size: 2vw;
+  font-size: 0.9rem;
 }
 
-/* Media Queries for Mobile and Tablet Responsiveness */
+/* Responsive Design Adjustments */
 @media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
   .container {
-    padding: 5vw;
+    padding: 20px;
   }
 
   header h1 {
-    font-size: 6vw;
+    font-size: 2.5rem;
   }
 
-  .profile-pic {
-    width: 50vw;
+  header p {
+    font-size: 1rem;
+  }
+
+  .bio {
+    flex-direction: column;
+    text-align: center;
   }
 
   .bio-text h2 {
-    font-size: 5vw;
+    font-size: 1.5rem;
   }
 
   .bio-text p {
-    font-size: 3vw;
-    padding: 0 3vw;  /* Increase padding for mobile devices */
+    font-size: 1rem;
   }
 
-  .music h3,
-  .comments h3 {
-    font-size: 4vw;
+  .music h3 {
+    font-size: 5vw;
+  }
+
+  .music iframe {
+    width: 90%;
+    height: 45vw;
   }
 
   .comments form input,
-  .comments form textarea,
-  .comments form button {
-    font-size: 3vw;
+  .comments form textarea {
+    font-size: 0.9rem;
   }
 
-  footer {
-    font-size: 3vw;
+  .comments form button {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 7vw;
-  }
-
   header h1 {
-    font-size: 7vw;
-  }
-
-  .profile-pic {
-    width: 60vw;
+    font-size: 2rem;
   }
 
   .bio-text h2 {
-    font-size: 6vw;
+    font-size: 1.3rem;
   }
 
   .bio-text p {
-    font-size: 4vw;
-    padding: 0 4vw;  /* Increase padding for better readability */
+    font-size: 0.9rem;
   }
 
-  .music h3,
-  .comments h3 {
-    font-size: 5vw;
+  .music h3 {
+    font-size: 6vw;
   }
 
-  .comments form input,
-  .comments form textarea,
-  .comments form button {
-    font-size: 4vw;
+  .music iframe {
+    width: 95%;
+    height: 40vw;
   }
 
-  footer {
-    font-size: 4vw;
+  .music .music-text {
+    font-size: 3vw;
   }
 }
