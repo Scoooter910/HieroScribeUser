@@ -2,117 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HieroScribe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans&display=swap" rel="stylesheet">
-  <!-- Link to External CSS File -->
-  <link rel="stylesheet" href="styles.css">
+  <title>ScoooterDev - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <div class="container">
     <header>
-      <h1>HieroScribe</h1>
-      <p>Write Your Legacy. Share Your World.</p>
+      <h1>ScoooterDev</h1>
+      <p>Hey, I'm Scoooter! Developer and Music Enthusiast!</p>
     </header>
 
-    <div class="bio">
-      <img src="LinkedInPic.jpg" alt="My Profile Picture" class="profile-pic">
+    <!-- Bio Section -->
+    <section class="bio">
+      <img class="profile-pic" src="https://via.placeholder.com/200" alt="Scooter's Profile Picture">
       <div class="bio-text">
-        <h2>Hey, I’m ScoooterDev 👋</h2>
-        <p>Welcome to HieroScribe — my corner of the web where code meets creativity. I’m a developer, dreamer, and digital explorer.</p>
-        <p>This page is just the beginning of a larger vision: blending retro internet charm with modern vibes. Stick around!</p>
+        <h2>About Me</h2>
+        <p>I’m Scoooter, a passionate developer working with various technologies. I love creating, experimenting, and sharing my projects with the world!</p>
       </div>
-    </div>
+    </section>
 
-    <div class="music">
+    <!-- Music Section -->
+    <section class="music">
       <h3>🎧 Now Playing</h3>
-      <iframe width="300" height="50" scrolling="no" frameborder="no" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+      <iframe width="80%" height="50vw" scrolling="no" frameborder="no" allow="autoplay; fullscreen"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2077210432&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=true&show_teaser=true&visual=true">
       </iframe>
-      <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;">
-        <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank" style="color: #cccccc; text-decoration: none;">ScoooterDev</a> · 
-        <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank" style="color: #cccccc; text-decoration: none;">mystic-elegy-258703 (7)</a>
+      <div class="music-text">
+        <a href="https://soundcloud.com/scoooterdev" title="ScoooterDev" target="_blank">ScoooterDev</a> · 
+        <a href="https://soundcloud.com/scoooterdev/mystic-elegy-258703-7" title="mystic-elegy-258703 (7)" target="_blank">mystic-elegy-258703 (7)</a>
       </div>
-    </div>
+    </section>
 
-    <div class="comments">
-      <h3>📝 Leave a Comment</h3>
-      <form id="comment-form">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="comment">Your Comment:</label>
-        <textarea id="comment" name="comment" rows="4" required></textarea>
-
-        <button type="submit">Post Comment</button>
+    <!-- Comments Section -->
+    <section class="comments">
+      <h3>Leave a Comment</h3>
+      <form action="#" method="post">
+        <label for="comment-name">Name</label>
+        <input type="text" id="comment-name" name="name" required>
+        
+        <label for="comment-text">Comment</label>
+        <textarea id="comment-text" name="comment" rows="4" required></textarea>
+        
+        <button type="submit">Submit</button>
       </form>
-
+      
       <div id="comments-list">
-        <h4>Comments</h4>
+        <div class="comment">
+          <div class="name">John Doe</div>
+          <div class="text">Great track!</div>
+          <button class="delete-btn">Delete</button>
+        </div>
+        <!-- Additional comments would go here -->
       </div>
-    </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
-      &copy; 2025 HieroScribe · ScoooterDev · Built with soul and style
+      <p>&copy; 2025 ScoooterDev</p>
     </footer>
   </div>
-
-<script>
-  const form = document.getElementById('comment-form');
-  const commentsList = document.getElementById('comments-list');
-
-  const API_BASE = 'https://hieroscribe-backend-a46705d2b99d.herokuapp.com';
-
-  // Load comments on page load
-  window.onload = function () {
-    loadComments();
-  };
-
-  function loadComments() {
-    fetch(`${API_BASE}/comments`)
-      .then(res => res.json())
-      .then(data => {
-        commentsList.innerHTML = '<h4>Comments</h4>';
-        data.forEach(comment => {
-          displayComment(comment.name, comment.text);
-        });
-      })
-      .catch(err => {
-        console.error('Failed to load comments:', err);
-      });
-  }
-
-  function displayComment(name, text) {
-    const commentElement = document.createElement('div');
-    commentElement.classList.add('comment');
-    commentElement.innerHTML = `
-      <span class="name">${name}</span>
-      <p class="text">${text}</p>
-    `;
-    commentsList.appendChild(commentElement);
-  }
-
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const name = form.name.value;
-    const comment = form.comment.value;
-
-    fetch(`${API_BASE}/comments`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, text: comment }),
-    })
-      .then(res => res.json())
-      .then(() => {
-        loadComments();
-        form.reset();
-      })
-      .catch(err => {
-        console.error('Failed to post comment:', err);
-      });
-  });
-</script>
-
 </body>
 </html>
