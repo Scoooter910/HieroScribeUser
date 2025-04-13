@@ -235,11 +235,13 @@
 
   // Load comments from the backend when the page loads
   window.onload = function() {
+    console.log("Page loaded. Loading comments...");
     loadComments();
   };
 
   // Function to load comments from the backend
   function loadComments() {
+    console.log("Fetching comments from the server...");
     fetch('https://hieroscribe-backend-a46705d2b99d.herokuapp.com/comments')
       .then(response => response.json())
       .then(comments => {
@@ -271,6 +273,7 @@
 
   // Function to delete a comment
   function deleteComment(name, text) {
+    console.log("Deleting comment:", name, text);
     fetch('https://hieroscribe-backend-a46705d2b99d.herokuapp.com/comments', {
       method: 'DELETE',
       headers: {
@@ -280,6 +283,7 @@
     })
       .then(response => response.json())
       .then(() => {
+        console.log("Comment deleted.");
         loadComments();  // Reload comments after deletion
       })
       .catch(err => console.error('Error deleting comment:', err));
@@ -288,10 +292,17 @@
   // Handle form submission to post a new comment
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    console.log("Form submitted!");
+    console.log("Form submitted!");  // Debugging statement to check form submission
 
     const name = document.getElementById('name').value;
     const comment = document.getElementById('comment').value;
+
+    // Check if form fields are filled out
+    if (name === "" || comment === "") {
+      console.log("Please fill out both fields.");
+      return;  // Don't submit if fields are empty
+    }
+
     console.log("Name:", name, "Comment:", comment);
 
     // Send a POST request to add the new comment
