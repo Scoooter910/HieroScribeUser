@@ -229,59 +229,88 @@
     </footer>
   </div>
 
-  <script>
-    const form = document.getElementById('comment-form');
-    const commentsList = document.getElementById('comments-list');
+<script>
+  const form = document.getElementById('comment-form');
+  const commentsList = document.getElementById('comments-list');
 
-    window.onload = function () {
-      loadComments();
-    };
+  const API_BASE = 'https://hieroscribe-backend-a46705d2b99d.herokuapp.com';
 
-    function loadComments() {
-      const comments = JSON.parse(localStorage.getItem('comments')) || [];
-      commentsList.innerHTML = '<h4>Comments</h4>';
-      comments.forEach(comment => {
-        displayComment(comment.name, comment.text);
+  // Load comments on page load
+  window.onload = function () {
+    loadComments();
+  };
+
+  function loadComments() {
+    fetch(`${API_BASE}/comments`)
+      .then(res => res.json())
+      .then(data => {
+        commentsList.innerHTML = '<h4>Comments</h4>';
+        data.forEach(comment => {
+          displayComment(comment.name, comment.text);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load comments:', err);
       });
-    }
+  }
 
-    function displayComment(name, text) {
-      const commentElement = document.createElement('div');
-      commentElement.classList.add('comment');
-      commentElement.innerHTML = `
-        <div class="name">${name}</div>
-        <div class="text">${text}</div>
-        <button class="delete-btn">Delete</button>
-      `;
-      commentsList.appendChild(commentElement);
+  function displayComment(name, text) {
+    const commentElement = document.createElement('div');
+    commentElement.classList.add('comment');
+    commentElement.innerHTML = `
+      <div class="name">${name}</div>
+      <div class="text">${text}</div>
+      <button class="delete-btn">Delete</button>
+    `;
+    commentsList.appendChild(commentElement);
 
-      const deleteBtn = commentElement.querySelector('.delete-btn');
-      deleteBtn.addEventListener('click', function () {
-        deleteComment(name, text);
-      });
-    }
-
-    function deleteComment(name, text) {
-      let comments = JSON.parse(localStorage.getItem('comments')) || [];
-      comments = comments.filter(comment => !(comment.name === name && comment.text === text));
-      localStorage.setItem('comments', JSON.stringify(comments));
-      loadComments();
-    }
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const comment = document.getElementById('comment').value.trim();
-
-      if (name && comment) {
-        const comments = JSON.parse(localStorage.getItem('comments')) || [];
-        comments.push({ name, text: comment });
-        localStorage.setItem('comments', JSON.stringify(comments));
-        displayComment(name, comment);
-        form.reset();
-      }
+    const deleteBtn = commentElement.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', function () {
+      deleteComment(name, text);
     });
-  </script>
+  }
+
+  function deleteComment(name, text) {
+    fetch(`${API_BASE}/comments`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, text })
+    })
+      .then(res => res.json())
+      .then(() => {
+        loadComments();
+      })
+      .catch(err => {
+        console.error('Failed to delete comment:', err);
+      });
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const comment = document.getElementById('comment').value.trim();
+
+    if (name && comment) {
+      fetch(`${API_BASE}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, text: comment })
+      })
+        .then(res => res.json())
+        .then(data => {
+          displayComment(data.name, data.text);
+          form.reset();
+        })
+        .catch(err => {
+          console.error('Failed to post comment:', err);
+        });
+    }
+  });
+</script>
 
 </body>
 </html>
